@@ -14,24 +14,22 @@ import {
   View,
   Text,
   StatusBar,
+  
 } from 'react-native';
 import AppMain from './AppMain'
-
+import {Provider} from 'react-redux' 
+import {createStore,applyMiddleware} from 'redux'
+import ReduxThunk from 'redux-thunk'
+import Reducers from './src/redux/reducers'
 
 const App = () => {
+  const store = createStore(Reducers,{},applyMiddleware(ReduxThunk))
   return (
     <>
-     <View>
-      <AppMain/> 
-     </View> 
-     {/* <View>
-       <SafeAreaView>
-        <Text>
-          APP JS
-        </Text>
-
-       </SafeAreaView>
-     </View> */}
+     <Provider store={store}>
+       <AppMain/>
+     </Provider>
+    
     </>
   );
 };

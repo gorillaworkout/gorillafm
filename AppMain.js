@@ -9,17 +9,27 @@ import {
     StatusBar,
   } from 'react-native';
   import AuthStackRoot from './src/navigation/AuthStackRoot'
+  import StackRoot from './src/navigation/StackRoot'
   import {NavigationContainer} from '@react-navigation/native'
+  import {useSelector,useDispatch} from 'react-redux'
+
 
 const AppMain=()=>{
+    const Auth = useSelector(state=>state.Auth)
+
     return (
         <>
-          <NavigationContainer>
-              <AuthStackRoot/>
+          <NavigationContainer headerMode='none '>
+              
+              {
+                  Auth.isLogin?
+                  <StackRoot/>
+                  :
+                  <AuthStackRoot/>
+              }
+              
           </NavigationContainer>
-          {/* <SafeAreaView>
-              <Text>ASd</Text>
-          </SafeAreaView> */}
+         
         </>
     )
 }
